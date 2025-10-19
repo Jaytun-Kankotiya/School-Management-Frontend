@@ -22,10 +22,9 @@ const StudentDetails = () => {
     marks: '',
   });
 
-  const {studentId} = useParams()
   const { student: locationStudent } = location.state || {};
 
-  const studentFromStore = useSelector((state) => state?.students?.students?.find((s) => s._id === studentId))
+  const studentFromStore = useSelector((state) => state?.students?.students?.find((s) => s._id === locationStudent?._id))
   const student = studentFromStore || locationStudent
 
 
