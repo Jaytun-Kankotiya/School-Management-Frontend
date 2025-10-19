@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../components/Navbar';
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -20,7 +20,10 @@ const TeacherDetails = () => {
     email: '',
   });
 
-  const { teacher } = location.state || {};
+  const { teacher: locationTeacher  } = location.state || {};
+
+  const teacherFromStore = useSelector((state) => state.teachers?.teachers?.find((t) => t._id === locationTeacher?._id))
+  const teacher = teacherFromStore || locationTeacher 
 
   useEffect(() => {
     if (teacher) {
@@ -34,7 +37,7 @@ const TeacherDetails = () => {
     }
   }, [teacher]);
 
-  console.log(teacher);
+  console.log(locationTeacher);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -83,8 +86,8 @@ const TeacherDetails = () => {
     <>
       <NavBar />
       {editMode ? (
-        <form onSubmit={formSubmitHandler} className="container py-3">
-          <h1>Edit Teacher</h1>
+        <form onSubmit={formSubmitHandler} className="container mt-3">
+          <h1 className='py-3'>Edit Teacher</h1>
           <input
             type="text"
             name="name"
@@ -154,8 +157,8 @@ const TeacherDetails = () => {
           </button>
         </form>
       ) : (
-        <main className="container py-3">
-          <h1>Teacher Detail</h1>
+        <main className="container mt-3">
+          <h1 className='py-3'>Teacher Detail</h1>
           <p>Name: {teacher.name}</p>
           <p>Subject: {teacher.subject}</p>
           <p>Experience: {teacher.experience} years</p>

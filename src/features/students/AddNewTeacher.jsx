@@ -34,8 +34,8 @@ const AddNewTeacher = () => {
   return (
     <>
       <NavBar />
-      <form onSubmit={handleSubmit} className="container py-3">
-        <h2>Add Teacher</h2>
+      <form onSubmit={handleSubmit} className="container mt-3">
+        <h2 className='py-3'>Add Teacher</h2>
 
         <input
           type="text"
@@ -43,7 +43,7 @@ const AddNewTeacher = () => {
           name="name"
           onChange={handleChange}
           placeholder="Name"
-          className="w-50 mb-3"
+          className="mb-3"
         />
         <br />
 
@@ -53,7 +53,7 @@ const AddNewTeacher = () => {
           value={teacher.subject}
           onChange={handleChange}
           placeholder="Subject"
-          className="w-50 mb-3"
+          className="mb-3"
         />
         <br />
 
@@ -63,7 +63,7 @@ const AddNewTeacher = () => {
           value={teacher.experience}
           onChange={handleChange}
           placeholder="Experience (years)"
-          className="w-50 mb-3"
+          className="mb-3"
         />
         <br />
 

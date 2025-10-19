@@ -37,7 +37,7 @@ const School = () => {
     <>
       <NavBar />
       <div className="container">
-        <h1 className="my-3">School View</h1>
+        <h1 className="my-3 text-center">School View</h1>
         <main>
           <h3>Students</h3>
           <p>Total Students: {students.length}</p>

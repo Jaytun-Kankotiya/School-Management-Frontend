@@ -22,7 +22,14 @@ const StudentDetails = () => {
     marks: '',
   });
 
-  const { student } = location.state || {};
+  const { student: locationStudent } = location.state || {};
+
+  const studentFromStore = useSelector((state) => state?.students?.students?.find((s) => s._id === locationStudent?._id))
+  const student = studentFromStore || locationStudent
+
+  console.log("Location Student", locationStudent)
+  console.log("Store Student", studentFromStore)
+  console.log("Student", student)
 
   useEffect(() => {
     dispatch(fetchStudents());
@@ -43,7 +50,6 @@ const StudentDetails = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log('Changing:', name, value);
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -54,9 +60,18 @@ const StudentDetails = () => {
     e.preventDefault();
 
     try {
+      const updated =
       await dispatch(
         updateStudentAsync({ id: student._id, updatedStudent: formData })
       ).unwrap();
+      setFormData({
+      name: updated.name,
+      grade: updated.grade,
+      age: updated.age,
+      gender: updated.gender,
+      attendance: updated.attendance,
+      marks: updated.marks,
+    });
       setEditMode(false);
       alert('Student updated successfully!');
     } catch (error) {
