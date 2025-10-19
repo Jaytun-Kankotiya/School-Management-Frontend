@@ -22,14 +22,12 @@ const StudentDetails = () => {
     marks: '',
   });
 
+  const {studentId} = useParams()
   const { student: locationStudent } = location.state || {};
 
-  const studentFromStore = useSelector((state) => state?.students?.students?.find((s) => s._id === locationStudent?._id))
+  const studentFromStore = useSelector((state) => state?.students?.students?.find((s) => s._id === studentId))
   const student = studentFromStore || locationStudent
 
-  console.log("Location Student", locationStudent)
-  console.log("Store Student", studentFromStore)
-  console.log("Student", student)
 
   useEffect(() => {
     dispatch(fetchStudents());

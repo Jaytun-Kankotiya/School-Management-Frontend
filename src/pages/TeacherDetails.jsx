@@ -24,6 +24,7 @@ const TeacherDetails = () => {
 
   const teacherFromStore = useSelector((state) => state.teachers?.teachers?.find((t) => t._id === locationTeacher?._id))
   const teacher = teacherFromStore || locationTeacher 
+  console.log("Location Teacher", locationTeacher)
 
   useEffect(() => {
     if (teacher) {
